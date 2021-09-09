@@ -1,28 +1,74 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Alunos />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Alunos from './components/Alunos/Alunos.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Alunos
   }
 }
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+body{
+  background-color: #eee;
+  font-family: "Montserrat", sans-serif;
+  display: grid;
+  justify-items: center;
+}
+body, html {
+  margin: 0;
+  height: 100%;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+}
+
+.btn_Danger{
+  background-color: #fa4430;
+}
+
+.btn{
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #000;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border-bottom: 3px solid #000;
+}
+.btn:hover{
+  text-shadow: 1px 1px 1px #000;
+  border-bottom: 1px solid black;
+}
+table {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  width: 100%;
+}
+table tr td{
+  padding: 20px;
+  font-size: 1.3em;
+  background-color: #e0edf4;
+  margin-bottom: 2px;
+  color: #3e5252;
+}
+table thead th{
+  background-color: rgb(184, 208, 216) !important;
+  font-size: 1.2em;
+  padding: 10px 0px;
+  text-align: center !important;
+}
+.colPequeno {
+  width: 5%;
 }
 </style>
