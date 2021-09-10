@@ -14,7 +14,7 @@
       </thead>
       <tbody v-if="alunos.length">
         <tr v-for="(aluno, index) in alunos" :key="index">
-          <td>{{ index+1 }}</td>
+          <td>{{ aluno.id }}</td>
           <td>{{ aluno.nome }}  {{ aluno.sobrenome }}</td>
           <td>
           <button class="btn btn_Danger" @click="remover(aluno)">Remover</button>
@@ -53,17 +53,26 @@ export default {
   methods: {
     addAluno() {
       let _aluno = {
-        nome: this.nome
+        nome: this.nome,
+        sobrenome: ""
       }
-      this.alunos.push(_aluno);
-      this.nome = '';
-      this.alunos.forEach(aluno => {
-        console.log(aluno);
-      });      
+      this.$http
+      .post('http://localhost:3000/alunos', _aluno)
+      .then(res => res.json())
+      .then(alunoReturn => {
+        this.alunos.push(alunoReturn);
+        this.nome = '';   
+      })
+         
     },
     remover(aluno) {
-      let indice = this.alunos.indexOf(aluno)
-      this.alunos.splice(indice, 1);
+
+      this.$http
+      .delete(`http://localhost:3000/alunos/${aluno.id}`)
+      .then(() => {
+        let indice = this.alunos.indexOf(aluno)
+        this.alunos.splice(indice, 1);
+      })      
     }
   },
 }
@@ -71,6 +80,7 @@ export default {
 
 <style scoped>
 input {
+  width: calc(100% - 195px);
   border: 0;
   padding: 20px;
   font-size: 1.3em;
@@ -78,6 +88,7 @@ input {
   display: inline;
 }
 .btnInput {
+  width: 150px;
   border: 0px;
   padding: 20px;
   display: inline;
