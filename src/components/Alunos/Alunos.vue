@@ -38,15 +38,26 @@ export default {
   data() {
     return {
       titulo: 'Aluno',
+
+      professorid: this.$route.params.prof_id, // DEFINE PRIMEIRO A ROTA NO ARQUIVO router.js > ISSO AQUI É PARA PASSAR NO COMPONENT DE ALUNO O ID DO PROFESSOR E BUSCAR OS SEUS ALUNOS CONFORME O ID PROFESSOR
+        // PEGAR O PARÂMETRO DA ROTA
       nome: '',
       alunos: []
     }
   },
   created() {
-    this.$http
-    .get('http://localhost:3000/alunos')
-    .then(res => res.json()) // passa o retorno para o próximo né
-    .then(alunos => this.alunos = alunos);
+    // ID DE PROFESSOR ESTÁ PREENCHIDO, PEGAR O ID DELE
+    if(this.professorid) {
+      this.$http
+      .get("http://localhost:3000/alunos?professor.id=" + this.professorid)
+      .then(res => res.json()) // passa o retorno para o próximo né
+      .then(alunos => this.alunos = alunos);
+    } else {
+      this.$http
+      .get('http://localhost:3000/alunos')
+      .then(res => res.json()) // passa o retorno para o próximo né
+      .then(alunos => this.alunos = alunos);
+    }    
   },
   props: {
   },
